@@ -6,22 +6,9 @@
         shopping-list
       </h1>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+        <NuxtLink to="/categories" class="button--green">Categories</NuxtLink>
+        <NuxtLink to="/products" class="button--green">Products</NuxtLink>
+        <NuxtLink to="/shopping" class="button--green">Shopping</NuxtLink>
       </div>
     </div>
   </div>
