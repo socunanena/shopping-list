@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    ports:
+      - 80:3000
+    networks:
+      shopping-list:
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      shopping-list:
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    ports:
+      - 8080:80
+    networks:
+      shopping-list:
+
+volumes:
+  db-data:
+
+networks:
+  shopping-list:
