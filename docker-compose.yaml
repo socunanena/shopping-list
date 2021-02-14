@@ -13,7 +13,7 @@ services:
       - db
 
   db:
-    image: mysql:8.0
+    image: mysql:5.7
     volumes:
       - db-data:/var/lib/mysql
     ports:
@@ -32,6 +32,8 @@ services:
       - 8080:80
     networks:
       shopping-list:
+    depends_on:
+      - db
 
 volumes:
   db-data:
