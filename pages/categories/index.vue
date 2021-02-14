@@ -24,10 +24,13 @@ export default {
         return;
       }
 
-      this.categories.push({
+      const category = {
         id: Math.ceil((Math.random() * 1000000)),
         name: this.newCategory,
-      });
+      };
+
+      this.categories.push(category);
+      this.$axios.$post('/api/categories', category);
 
       this.newCategory = null;
     },
