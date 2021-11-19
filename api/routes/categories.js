@@ -23,4 +23,14 @@ router.post('/categories', (req, res) => {
   });
 });
 
+router.delete('/categories/:id', (req, res) => {
+  const { id } = req.params;
+
+  db.query('DELETE FROM categories WHERE id = ?', [id], (error) => {
+    if (error) {
+      res.json(error);
+    }
+  });
+});
+
 export default router;

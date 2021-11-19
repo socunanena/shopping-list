@@ -6,6 +6,7 @@
       </li>
       <li v-for="category in categories" :key="category.id">
         {{ category.name }}
+        <button @click="deleteCategory(category.id)">X</button>
       </li>
     </ul>
   </div>
@@ -33,6 +34,10 @@ export default {
       this.$axios.$post('/categories', category);
 
       this.newCategory = null;
+    },
+    deleteCategory(id) {
+      this.categories = this.categories.filter(category => category.id !== id);
+      this.$axios.$delete(`/categories/${id}`);
     },
   },
   async asyncData({ $axios }) {
