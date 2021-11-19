@@ -43,8 +43,8 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: 'http://app:3000',
-    browserBaseURL: 'http://localhost',
+    baseURL: 'http://app:3000/api',
+    browserBaseURL: 'http://localhost/api',
   },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)

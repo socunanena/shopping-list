@@ -30,14 +30,14 @@ export default {
       };
 
       this.categories.push(category);
-      this.$axios.$post('/api/categories', category);
+      this.$axios.$post('/categories', category);
 
       this.newCategory = null;
     },
   },
   async asyncData({ $axios }) {
     return {
-      categories: await $axios.$get('/api/categories'),
+      categories: await $axios.$get('/categories'),
     };
   },
 };
