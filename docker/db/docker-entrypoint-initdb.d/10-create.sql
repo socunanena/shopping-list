@@ -19,5 +19,6 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE TABLE IF NOT EXISTS list_with_products (
   id_list INT NOT NULL COMMENT 'References lists.id',
-  id_product INT NOT NULL COMMENT 'References products.id'
+  id_product INT NOT NULL COMMENT 'References products.id',
+  PRIMARY KEY (id_list, id_product)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
