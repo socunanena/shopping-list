@@ -35,7 +35,7 @@ router.delete('/products/:id', (req, res) => {
 
 router.get('/products/list/:listId', (req, res) => {
   const listId = req.params.listId;
-  db.query('SELECT p.id, p.name, c.name AS category FROM products p LEFT JOIN categories c ON p.id_category = c.id INNER JOIN list_with_products lp ON p.id = lp.id_product WHERE lp.id_list = ?', [listId], (error, products) => {
+  db.query('SELECT p.id, p.name, c.name AS category, p.is_checked AS isChecked FROM products p LEFT JOIN categories c ON p.id_category = c.id INNER JOIN list_with_products lp ON p.id = lp.id_product WHERE lp.id_list = ?', [listId], (error, products) => {
     if (error) {
       res.json([]);
     }
@@ -48,6 +48,17 @@ router.post('/products/list', (req, res) => {
   const { productId, listId } = req.body;
 
   db.query('INSERT INTO list_with_products (id_list, id_product) VALUES (?, ?)', [listId, productId], (error) => {
+    if (error) {
+      res.json([]);
+    }
+  });
+});
+
+router.patch('/products/check/:id', (req, res) => {
+  const { id } = req.params;
+  const { isChecked } = req.body;
+
+  db.query('UPDATE products SET is_checked = ? WHERE id = ?', [isChecked, id], (error) => {
     if (error) {
       res.json([]);
     }

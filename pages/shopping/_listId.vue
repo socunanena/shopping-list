@@ -9,10 +9,10 @@
           <option v-for="product in products" :key="product.id" :value="product">{{ product.name }}</option>
         </select>
       </li>
-      <li v-for="product in productsByList" :key="product.id">
+      <li v-for="product in productsByList" :key="product.id" :class="product.isChecked">
         {{ product.name }}
         {{ product.category }}
-        <!-- <button @click="deleteProduct(product.id)">X</button> -->
+        <input type="checkbox" v-model="product.isChecked" @click="toggleProduct(product)">
       </li>
     </ul>
   </div>
@@ -36,6 +36,10 @@ export default {
       this.$axios.$post('/products/list', { listId: this.listId, productId: this.product.id });
 
       this.product = null;
+    },
+    toggleProduct(product) {
+      product.isChecked = !product.isChecked;
+      this.$axios.$patch(`/products/check/${product.id}`, { isChecked: product.isChecked });
     },
   },
   async asyncData({ params, $axios }) {
