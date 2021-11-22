@@ -1,14 +1,43 @@
 <template>
   <div>
-    <ul>
-      <li>
-        <input type="text" v-model="newList" @keyup.enter="addList" />
-      </li>
-      <li v-for="list in lists" :key="list.id">
-        {{ list.name }}
-        <button @click="deleteList(list.id)">X</button>
-      </li>
-    </ul>
+    <v-data-table
+      :headers="[{ value: 'name' }, { value: 'actions' }]"
+      :items="lists"
+      class="elevation-1"
+      hide-default-header
+      hide-default-footer
+      mobile-breakpoint=200
+    >
+      <template v-slot:top>
+        <v-text-field
+          type="text"
+          label="New list"
+          class="px-4 pt-4"
+          v-model="newList"
+          append-icon="mdi-send"
+          @click:append="addList"
+          @keyup.enter="addList"
+          outlined
+        ></v-text-field>
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <div class="d-flex justify-end">
+          <v-icon @click="openDialog(item)">mdi-delete</v-icon>
+        </div>
+      </template>
+    </v-data-table>
+
+    <v-dialog v-model="dialog" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h5">Are you sure you want to delete {{ listToDelete && listToDelete.name }} list?</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="closeDialog">Cancel</v-btn>
+          <v-btn text @click="deleteList">OK</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -17,6 +46,8 @@ export default {
   data() {
     return {
       newList: null,
+      listToDelete: null,
+      dialog: false,
     };
   },
   methods: {
@@ -35,9 +66,18 @@ export default {
 
       this.newList = null;
     },
-    deleteList(id) {
-      this.lists = this.lists.filter(list => list.id !== id);
-      this.$axios.$delete(`/lists/${id}`);
+    deleteList() {
+      this.lists = this.lists.filter(list => list.id !== this.listToDelete.id);
+      this.$axios.$delete(`/lists/${this.listToDelete.id}`);
+      this.closeDialog();
+    },
+    openDialog(list) {
+      this.dialog = true;
+      this.listToDelete = list;
+    },
+    closeDialog() {
+      this.dialog = false;
+      this.listToDelete = null;
     },
   },
   async asyncData({ $axios }) {

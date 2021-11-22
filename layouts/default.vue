@@ -3,7 +3,7 @@
     <v-app-bar app></v-app-bar>
 
     <v-main>
-      <v-container class="d-flex justify-center">
+      <v-container>
         <Nuxt />
       </v-container>
     </v-main>
