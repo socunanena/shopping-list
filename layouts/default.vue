@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary"></v-app-bar>
+    <Header />
 
     <v-main class="primary lighten-5">
       <v-container>
@@ -10,5 +10,10 @@
   </v-app>
 </template>
 
-<style>
-</style>
+<script>
+import Header from '../components/Header.vue';
+
+export default {
+  components: { Header },
+};
+</script>
