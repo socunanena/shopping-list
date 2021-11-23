@@ -28,13 +28,14 @@
       </template>
     </v-data-table>
 
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title class="text-h5">Are you sure you want to delete {{ listToDelete && listToDelete.name }} list?</v-card-title>
+        <v-card-title>Are you sure?</v-card-title>
+        <v-card-text>Do you want to delete <span class="font-weight-bold">{{ listToDelete && listToDelete.name }}</span> list?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="closeDialog">Cancel</v-btn>
-          <v-btn text @click="deleteList">OK</v-btn>
+          <v-btn text color="primary" @click="closeDialog">No</v-btn>
+          <v-btn text color="primary" @click="deleteList">Yes</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
