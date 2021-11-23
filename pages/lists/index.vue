@@ -17,6 +17,7 @@
           append-icon="mdi-send"
           @click:append="addList"
           @keyup.enter="addList"
+          color="primary"
           outlined
         ></v-text-field>
       </template>

@@ -49,6 +49,10 @@ export default {
     browserBaseURL: 'http://localhost/api',
   },
 
+  vuetify: {
+    optionsPath: './vuetify.options.js',
+  },
+
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
 

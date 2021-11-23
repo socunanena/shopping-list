@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app></v-app-bar>
+    <v-app-bar app color="primary"></v-app-bar>
 
-    <v-main>
+    <v-main class="primary lighten-5">
       <v-container>
         <Nuxt />
       </v-container>
