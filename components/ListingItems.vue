@@ -47,6 +47,7 @@
 export default {
   data() {
     return {
+      items: this.initialItems,
       newItem: null,
       itemToDelete: null,
       dialog: false,
@@ -55,7 +56,7 @@ export default {
   props: [
     'type',
     'path',
-    'items',
+    'initialItems',
   ],
   methods: {
     addItem() {

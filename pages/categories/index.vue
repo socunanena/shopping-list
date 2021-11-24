@@ -1,5 +1,5 @@
 <template>
-  <ListingItems type="category" path="/categories" :items="categories" />
+  <ListingItems type="category" path="/categories" :initialItems="categories" />
 </template>
 
 <script>

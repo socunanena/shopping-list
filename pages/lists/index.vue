@@ -1,5 +1,5 @@
 <template>
-  <ListingItems type="list" path="/lists" :items="lists" />
+  <ListingItems type="list" path="/lists" :initialItems="lists" />
 </template>
 
 <script>
