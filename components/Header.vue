@@ -18,9 +18,9 @@
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-sm-and-up"></v-app-bar-nav-icon>
 
-      <v-app-bar-title>
+      <v-toolbar-title>
         TITLE
-      </v-app-bar-title>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
