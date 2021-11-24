@@ -3,6 +3,7 @@
    <v-data-table
       :headers="[{ value: 'name' }, { value: 'actions' }]"
       :items="items"
+      :items-per-page="-1"
       class="elevation-1"
       hide-default-header
       hide-default-footer
