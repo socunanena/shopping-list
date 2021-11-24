@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer app v-model="drawer" color="primary lighten-3">
+    <v-navigation-drawer app temporary v-model="drawer" color="primary lighten-3">
       <v-list>
         <v-list-item-group color="primary darken-4">
           <v-list-item v-for="page in pages" :key="page.title" :to="page.link">
