@@ -7,24 +7,44 @@
       hide-default-header
       hide-default-footer
       mobile-breakpoint=200
+      group-by="category"
     >
       <template v-slot:top>
-        <v-text-field
-          type="text"
-          :label="`New ${type}`"
-          class="px-4 pt-4"
-          v-model="newItem"
-          append-icon="mdi-send"
-          @click:append="addItem"
-          @keyup.enter="addItem"
-          color="primary"
-          outlined
-        ></v-text-field>
+        <v-row class="px-4 pt-4">
+          <v-col cols=12 sm=4 v-if="type === 'product'">
+            <v-select
+              v-model="newItem.category"
+              label="Category"
+              :items="categories"
+              item-text="name"
+              item-value="id"
+              outlined
+              return-object
+            ></v-select>
+          </v-col>
+          <v-col>
+            <v-text-field
+              type="text"
+              v-model="newItem.name"
+              :label="`New ${type}`"
+              append-icon="mdi-send"
+              @click:append="addItem"
+              @keyup.enter="addItem"
+              color="primary"
+              outlined
+            ></v-text-field>
+          </v-col>
+        </v-row>
       </template>
       <template v-slot:item.actions="{ item }">
         <div class="d-flex justify-end">
           <v-icon @click="openDialog(item)">mdi-delete</v-icon>
         </div>
+      </template>
+      <template v-slot:group.header="{ group, headers, toggle }">
+        <td :colspan="headers.length" @click="toggle" v-if="type === 'product'">
+          <v-btn text plain elevation="0" class="text-subtitle-2 font-weight-bold">{{ group }}</v-btn>
+        </td>
       </template>
     </v-data-table>
 
@@ -48,7 +68,7 @@ export default {
   data() {
     return {
       items: this.initialItems,
-      newItem: null,
+      newItem: {},
       itemToDelete: null,
       dialog: false,
     };
@@ -57,22 +77,25 @@ export default {
     'type',
     'path',
     'initialItems',
+    'categories',
   ],
   methods: {
     addItem() {
-      if (!this.newItem) {
+      if (!this.newItem.name) {
         return;
       }
 
       const item = {
         id: Math.ceil((Math.random() * 1000000)),
-        name: this.newItem,
+        name: this.newItem.name,
+        categoryId: this.newItem.category?.id,
+        category: this.newItem.category?.name,
       };
 
       this.items.push(item);
       this.$axios.$post(this.path, item);
 
-      this.newItem = null;
+      this.newItem = {};
     },
     deleteItem() {
       this.items = this.items.filter(item => item.id !== this.itemToDelete.id);
