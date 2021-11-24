@@ -74,12 +74,23 @@ export default {
       dialog: false,
     };
   },
-  props: [
-    'type',
-    'path',
-    'initialItems',
-    'categories',
-  ],
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+    path: {
+      type: String,
+      required: true,
+    },
+    initialItems: {
+      type: Array,
+      required: true,
+    },
+    categories: {
+      type: Array,
+    },
+  },
   methods: {
     addItem() {
       if (!this.newItem.name) {
