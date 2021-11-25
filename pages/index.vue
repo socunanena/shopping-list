@@ -16,7 +16,7 @@
           v-model="product"
           label="Product"
           :items="products"
-          :item-text="composeProductWithCategory"
+          :item-text="({ name, category }) => `${name} [${category}]`"
           return-object
           @input="addProduct"
           outlined
@@ -56,9 +56,6 @@ export default {
     };
   },
   methods: {
-    composeProductWithCategory({ name, category }) {
-      return `${name} [${category}]`;
-    },
     addProduct(product) {
       if (!this.productsWithLists.some(p => p.id === product.id && p.listId === this.list.id)) {
         this.productsWithLists.push({ ...product, list: this.list.name });
