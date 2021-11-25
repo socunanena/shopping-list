@@ -34,7 +34,7 @@ router.delete('/products/:id', (req, res) => {
 });
 
 router.get('/products/list', (req, res) => {
-  db.query('SELECT p.id, p.name, p.is_checked AS isChecked, c.name AS category, l.name AS list FROM products p LEFT JOIN categories c ON p.id_category = c.id INNER JOIN list_with_products lp ON p.id = lp.id_product INNER JOIN lists l ON lp.id_list = l.id', (error, products) => {
+  db.query('SELECT p.id, p.name, p.is_checked AS isChecked, c.name AS category, l.name AS list, l.id AS listId FROM products p LEFT JOIN categories c ON p.id_category = c.id INNER JOIN list_with_products lp ON p.id = lp.id_product INNER JOIN lists l ON lp.id_list = l.id', (error, products) => {
     if (error) {
       res.json([]);
     }

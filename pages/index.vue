@@ -60,9 +60,10 @@ export default {
       return `${name} [${category}]`;
     },
     addProduct(product) {
-      // compte amb els duplicats
-      this.productsWithLists.push({ ...product, list: this.list.name });
-      this.$axios.$post('/products/list', { productId: product.id, listId: this.list.id });
+      if (!this.productsWithLists.some(p => p.id === product.id && p.listId === this.list.id)) {
+        this.productsWithLists.push({ ...product, list: this.list.name });
+        this.$axios.$post('/products/list', { productId: product.id, listId: this.list.id });
+      }
 
       this.product = {};
     }
