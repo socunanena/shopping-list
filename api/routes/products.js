@@ -4,7 +4,7 @@ import db from '../db/connection';
 const router = Router();
 
 router.get('/products', (req, res) => {
-  db.query('SELECT p.id, p.name, c.name AS category FROM products p LEFT JOIN categories c ON p.id_category = c.id', (error, products) => {
+  db.query('SELECT p.id, p.name, c.name AS category, p.is_checked AS isChecked FROM products p LEFT JOIN categories c ON p.id_category = c.id', (error, products) => {
     if (error) {
       res.json([]);
     }
@@ -33,9 +33,8 @@ router.delete('/products/:id', (req, res) => {
   });
 });
 
-router.get('/products/list/:listId', (req, res) => {
-  const listId = req.params.listId;
-  db.query('SELECT p.id, p.name, c.name AS category, p.is_checked AS isChecked FROM products p LEFT JOIN categories c ON p.id_category = c.id INNER JOIN list_with_products lp ON p.id = lp.id_product WHERE lp.id_list = ?', [listId], (error, products) => {
+router.get('/products/list', (req, res) => {
+  db.query('SELECT p.id, p.name, p.is_checked AS isChecked, c.name AS category, l.name AS list FROM products p LEFT JOIN categories c ON p.id_category = c.id INNER JOIN list_with_products lp ON p.id = lp.id_product INNER JOIN lists l ON lp.id_list = l.id', (error, products) => {
     if (error) {
       res.json([]);
     }
