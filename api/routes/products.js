@@ -53,6 +53,16 @@ router.post('/products/list', (req, res) => {
   });
 });
 
+router.delete('/products/list/:productId', (req, res) => {
+  const { productId } = req.params;
+
+  db.query('DELETE FROM list_with_products WHERE id_product = ?', [productId], (error) => {
+    if (error) {
+      res.json([]);
+    }
+  });
+});
+
 router.patch('/products/check/:id', (req, res) => {
   const { id } = req.params;
   const { isChecked } = req.body;

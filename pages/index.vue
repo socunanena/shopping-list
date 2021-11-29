@@ -54,6 +54,14 @@
     </v-row>
 
     <v-row>
+      <v-col class="d-flex justify-center">
+        <v-btn color="primary" @click="clearCheckedProducts">
+          Remove completed
+        </v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row>
       <v-col>
         <v-expansion-panels flat>
           <v-expansion-panel>
@@ -114,6 +122,13 @@ export default {
     checkProduct(product) {
       this.productsWithLists.filter(p => p.id === product.item.id).forEach(p => p.isChecked = product.value);
       this.$axios.$patch(`/products/check/${product.item.id}`, { isChecked: product.value });
+    },
+    clearCheckedProducts() {
+      this.checkedProducts.forEach(product => this.$axios.$delete(`/products/list/${product.id}`));
+
+      this.checkedProducts = [];
+
+      this.productsWithLists = this.productsWithLists.filter(product => !product.isChecked);
     },
   },
   async asyncData({ $axios }) {
