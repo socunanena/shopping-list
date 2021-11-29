@@ -1,0 +1,6 @@
+build:
+  docker:
+    web: docker/app/Dockerfile
+
+run:
+  web: yarn run dev
