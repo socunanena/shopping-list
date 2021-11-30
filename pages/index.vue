@@ -113,7 +113,7 @@ export default {
   methods: {
     addProduct(product) {
       if (!this.productsWithLists.some(p => p.id === product.id && p.listId === this.list.id)) {
-        this.productsWithLists.push({ ...product, list: this.list.name });
+        this.productsWithLists.push({ ...product, list: this.list.name, listId: this.list.id });
         this.$axios.$post('/products/list', { productId: product.id, listId: this.list.id });
       }
 
