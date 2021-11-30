@@ -21,6 +21,8 @@ router.post('/lists', (req, res) => {
       res.json(error);
     }
   });
+
+  res.status(201).end();
 });
 
 router.delete('/lists/:id', (req, res) => {
@@ -31,6 +33,8 @@ router.delete('/lists/:id', (req, res) => {
       res.json(error);
     }
   });
+
+  res.status(204).end();
 });
 
 export default router;

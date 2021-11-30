@@ -21,6 +21,8 @@ router.post('/products', (req, res) => {
       res.json(error);
     }
   });
+
+  res.status(201).end();
 });
 
 router.delete('/products/:id', (req, res) => {
@@ -31,6 +33,8 @@ router.delete('/products/:id', (req, res) => {
       res.json(error);
     }
   });
+
+  res.status(204).end();
 });
 
 router.get('/products/list', (req, res) => {
@@ -51,6 +55,8 @@ router.post('/products/list', (req, res) => {
       res.json([]);
     }
   });
+
+  res.status(201).end();
 });
 
 router.delete('/products/list/:productId', (req, res) => {
@@ -72,6 +78,8 @@ router.patch('/products/check/:id', (req, res) => {
       res.json([]);
     }
   });
+
+  res.status(204).end();
 });
 
 export default router;
