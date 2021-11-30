@@ -124,11 +124,11 @@ export default {
       this.$axios.$patch(`/products/check/${product.item.id}`, { isChecked: product.value });
     },
     clearCheckedProducts() {
-      this.$axios.$put('/products/list', { products: this.checkedProducts });
-
-      this.checkedProducts = [];
-
-      this.productsWithLists = this.productsWithLists.filter(product => !product.isChecked);
+      if (this.checkedProducts.length !== 0) {
+        this.$axios.$put('/products/list', { products: this.checkedProducts });
+        this.checkedProducts = [];
+        this.productsWithLists = this.productsWithLists.filter(product => !product.isChecked);
+      }
     },
   },
   async asyncData({ $axios }) {
