@@ -124,7 +124,7 @@ export default {
       this.$axios.$patch(`/products/check/${product.item.id}`, { isChecked: product.value });
     },
     clearCheckedProducts() {
-      this.checkedProducts.forEach(product => this.$axios.$delete(`/products/list/${product.id}`));
+      this.$axios.$put('/products/list', { products: this.checkedProducts });
 
       this.checkedProducts = [];
 

@@ -37,6 +37,25 @@ router.delete('/products/list/:productId', (req, res) => {
   res.status(204).end();
 });
 
+router.put('/products/list', (req, res) => {
+  const { products } = req.body;
+  const productIds = products.map(product => product.id);
+
+  db.query('DELETE FROM list_with_products WHERE id_product IN (?)', [productIds], (error) => {
+    if (error) {
+      res.json(error);
+    }
+  });
+
+  db.query('UPDATE products SET is_checked = ? WHERE id IN (?)', [false, productIds], (error) => {
+    if (error) {
+      res.json(error);
+    }
+  });
+
+  res.status(204).end();
+});
+
 router.get('/products', (req, res) => {
   db.query('SELECT p.id, p.name, c.name AS category, p.is_checked AS isChecked FROM products p LEFT JOIN categories c ON p.id_category = c.id', (error, products) => {
     if (error) {
