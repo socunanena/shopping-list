@@ -31,6 +31,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // https://auth.nuxtjs.org/
+    '@nuxtjs/auth-next',
     // https://github.com/nuxt-community/vuetify-module
     '@nuxtjs/vuetify',
     // https://go.nuxtjs.dev/pwa
@@ -47,6 +49,20 @@ export default {
   axios: {
     baseURL: 'http://app:3000/api',
     browserBaseURL: 'http://localhost/api',
+  },
+
+  auth: {
+    strategies: {
+      google: {
+        clientId: '855452335775-v6r8utlltr1kcln9g6v9h4vh5v732udj.apps.googleusercontent.com',
+        codeChallengeMethod: '',
+        responseType: 'code',
+        endpoints: {
+          token: 'http://localhost/api/social-login/google',
+          userInfo: 'http://localhost/api/auth/user',
+        },
+      },
+    },
   },
 
   vuetify: {

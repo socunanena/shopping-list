@@ -19,7 +19,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-sm-and-up"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
-        TITLE
+        <UserSession />
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
